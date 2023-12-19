@@ -1,24 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 
-const Accordion = ({ data }) => {
+const Accordion = ({ title, info }) => {
+  const [showInfo, setShowInfo] = useState(false);
   return (
-    <>
-      {data.map((data) => {
-        return (
-          <div key={data.id}>
-            <div>
-              <span>
-                <FaPlus />
-              </span>
-              <h2>{data.title}</h2>
-            </div>
-            <p>{data.info}</p>
-          </div>
-        );
-      })}
-    </>
+    <article>
+      <header>
+        <h2>{title}</h2>
+        <button onClick={() => setShowInfo(!showInfo)}>
+          {showInfo ? <FaMinus /> : <FaPlus />}
+        </button>
+      </header>
+      {showInfo && <p>{info}</p>}
+    </article>
   );
 };
 
